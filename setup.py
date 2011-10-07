@@ -27,6 +27,8 @@ setup(name='banking.statements.nordea',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
+      [banking.statements.readerplugin]
+      nordea = banking.statements.nordea:ReaderPlugin
       # -*- Entry points: -*-
       """,
       )

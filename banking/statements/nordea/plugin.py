@@ -32,8 +32,14 @@ class NordeaReaderPlugin(CSVReaderPlugin):
    ENCODING = "utf-8"
 
    def __init__(self, linestream, dialect=NordeaDialect(), debug=False):
+
+      # pop away the two first lines with acc number & newline
+      linestream.next()
+      linestream.next()
+
       CSVReaderPlugin.__init__(self, linestream, debug=debug, dialect=dialect)
       self._mapping = MAPPING_V1
+      mappedcolumns = [self._mapping[commonfield] for commonfield in FIELDS]
       self._columns = [col.encode(self.ENCODING) for col in mappedcolumns]
 
 
