@@ -43,6 +43,10 @@ class NordeaReaderPlugin(CSVReaderPlugin):
       self._columns = [col.encode(self.ENCODING) for col in mappedcolumns]
 
 
+   def can_parse(self, stream):
+      "return True if this plugin can parse the stream"
+      raise NotImplementedError
+
    def format_record(self, row):
       data = [row[colname] for colname in self._columns]
       data[1] = decimal.Decimal(data[1].replace(',','.'))
