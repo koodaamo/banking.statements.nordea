@@ -2,9 +2,9 @@
 import csv
 import decimal
 from banking.statements.plugin import CSVReaderPlugin
-from banking.statements.config import FIELDS
 from banking.statements.util import logger, ColumnMismatchError
 
+from banking.statements import AccountEntryRecord as Record
 
 class NordeaDialect(csv.Dialect):
    "Definitions for reading information from Nordea account statements"
@@ -39,7 +39,7 @@ class NordeaReaderPlugin(CSVReaderPlugin):
 
       CSVReaderPlugin.__init__(self, linestream, debug=debug, dialect=dialect)
       self._mapping = MAPPING_V1
-      mappedcolumns = [self._mapping[commonfield] for commonfield in FIELDS]
+      mappedcolumns = [self._mapping[commonfield] for commonfield in Record._fields]
       self._columns = [col.encode(self.ENCODING) for col in mappedcolumns]
 
 
@@ -50,6 +50,6 @@ class NordeaReaderPlugin(CSVReaderPlugin):
    def format_record(self, row):
       data = [row[colname] for colname in self._columns]
       data[1] = decimal.Decimal(data[1].replace(',','.'))
-      return tuple(data)
+      return Record._make(data)
 
 
