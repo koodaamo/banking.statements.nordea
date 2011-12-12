@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.1.2'
+version = '1.1.4'
 
 setup(name='banking.statements.nordea',
       version=version,
@@ -28,7 +28,7 @@ setup(name='banking.statements.nordea',
       ],
       entry_points="""
       [banking.statements.readerplugin]
-      nordea = banking.statements.nordea:ReaderPlugin
+      nordea = banking.statements.nordea:NordeaReaderPlugin
       # -*- Entry points: -*-
       """,
       )

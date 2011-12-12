@@ -20,7 +20,7 @@ class NordeaDialect(csv.Dialect):
 
 MAPPING_V1 = {
    "date": u'Arvop\xe4iv\xe4', "amount": u'M\xe4\xe4r\xe4' ,"description":u"Tapahtuma",
-   "account": u"Tilinumero", "payee/recipient": u"Saaja/Maksaja",
+   "account": u"Tilinumero", "payee_or_recipient": u"Saaja/Maksaja",
    "reference":u"Viite", "message":u"Viesti"
 }
 
