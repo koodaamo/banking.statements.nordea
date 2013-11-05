@@ -20,10 +20,15 @@ class NordeaDialect(csv.Dialect):
 class NordeaPlugin(Plugin):
     "Suomen Osuuspankki / Finnish Osuuspankki"
 
+    def get_csv_signature(self, csvfile):
+        csvfile.readline() # account # line
+        csvfile.readline() # first empty
+        csvfile.readline() # second empty
+        return csvfile.readline().strip()
+
     def get_parser(self, fin):
-        f = open(fin, "r", encoding='UTF-8')
-        signature = f.readline().strip()
-        f.seek(0)
+        f = open(fin, "r", encoding="1252")
+        signature = self.get_csv_signature(f)
         if signature in SIGNATURES:
             parser = NordeaCsvStatementParser(f)
             parser.statement.account_id = self.settings['account']
@@ -32,4 +37,5 @@ class NordeaPlugin(Plugin):
             return parser
 
         # no plugin with matching signature was found
+        f.close()
         raise Exception("No suitable Nordea parser found for this statement file.")
