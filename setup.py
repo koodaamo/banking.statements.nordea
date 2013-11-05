@@ -1,34 +1,31 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.1.4'
+version = '1.2'
 
 setup(name='banking.statements.nordea',
       version=version,
       description="",
-      long_description=open("README.txt").read() + "\n" +
+      long_description=open("README.md").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
-      # Get more strings from
-      # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Programming Language :: Python",
         ],
       keywords='',
-      author='',
-      author_email='',
-      url='http://svn.plone.org/svn/collective/',
-      license='GPL',
+      author='Petri Savolainen',
+      author_email='petri.savolainen@koodaamo.fi',
+      url='http://koodaamo.fi',
+      license='GPL2',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['banking', 'banking.statements'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
           'setuptools',
-          # -*- Extra requirements: -*-
+          'ofxstatement'
       ],
       entry_points="""
-      [banking.statements.readerplugin]
-      nordea = banking.statements.nordea:NordeaReaderPlugin
-      # -*- Entry points: -*-
+      [ofxstatement]
+      nordea = banking.statements.nordea.plugin:NordeaPlugin
       """,
       )
