@@ -1,4 +1,4 @@
 Introduction
 ============
 
-- 1.1.4: Switch to using collections.namedtuple
+Parser to read TSV-formatted files exported from the Finnish Nordea e-banking service.
