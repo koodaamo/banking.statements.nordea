@@ -10,40 +10,40 @@ from . import TRANSACTION_TYPES
 
 SIGNATURES = (
 "Arvop\xe4iv\xe4\tM\xe4\xe4r\xe4\Tapahtuma\tTilinumero\tSaaja/Maksaja\tViite\tViesti",
+"Kirjauspäivä	Arvopäivä	Maksupäivä	Määrä	Saaja/Maksaja	Tilinumero	BIC	Tapahtuma	Viite	Maksajan viite	Viesti	Kortinnumero	Kuitti",
 )
+
+COLUMNS = 12
 
 class NordeaCsvStatementParser(CsvStatementParser):
     "parser for various variations with common field semantics"
     
     mappings = {
-       "date":0, "amount":1, "trntype":2, "acctto":3, "payee":4,
-       "refnum":5, "memo":6
+       "date":0, "amount":3, "payee":4, "acctto":5, "trntype":7, "refnum":8, "memo":9
     }
 
     date_format = "%d.%m.%Y"
-
-    def __init__(self, fin):
-        sin=StringIO()
-        for l in fin:
-           # Some versions from 2011 have broken CSV...
-           sin.write(l.replace("&amp;amp;", "&"))
-        sin.seek(0)
-        super().__init__(sin)
 
     def split_records(self):
         return csv.reader(self.fin, delimiter='\t', quotechar='"')
 
     def parse_record(self, line):
-        #Free Headerlines
-        if self.cur_record <= 2:
-            return None
+        # The plugin has iterated over the prefix lines for us already
+        #if self.cur_record <= 3:
+        #    return None
 
         # Change decimalsign from , to .
-        line[1] = line[1].replace(',', '.')
+        line[3] = line[3].replace(',', '.')
 
         # Set transaction type
-        line[2] = TRANSACTION_TYPES[line[2]]
+        line[7] = TRANSACTION_TYPES[line[7].upper()]
+
+        # the CSV leaves off empty data at the end of record
+        # so we fill in some blanks
+        missing = COLUMNS - len(line)
+        line.extend(missing * [""])
 
         # fill statement line according to mappings
         sl = super(NordeaCsvStatementParser, self).parse_record(line)
         return sl
+
