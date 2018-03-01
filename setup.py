@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.2'
+version = '1.2.1'
 
 setup(name='banking.statements.nordea',
       version=version,
@@ -10,9 +10,10 @@ setup(name='banking.statements.nordea',
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
         "Programming Language :: Python",
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Programming Language :: Python :: 3',
         'Natural Language :: English',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Topic :: Office/Business :: Financial :: Accounting',
         'Topic :: Utilities',
         'Environment :: Console',
@@ -22,7 +23,7 @@ setup(name='banking.statements.nordea',
       author='Petri Savolainen',
       author_email='petri.savolainen@koodaamo.fi',
       url='https://github.com/koodaamo/banking.statements.nordea',
-      license='GPL2',
+      license='GPLv3',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['banking', 'banking.statements'],
       include_package_data=True,

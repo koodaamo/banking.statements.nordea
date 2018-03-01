@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.2.1
+-----
+
+- Switch to GPLv3
+- Add travis config
+
 1.2
 ----
 
