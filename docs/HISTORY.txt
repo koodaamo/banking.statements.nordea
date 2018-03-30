@@ -1,5 +1,9 @@
 Changelog
 =========
+1.3.0
+-----
+
+- Updated the parser to work with the most recent version of the Nordea transaction file
 
 1.2.1
 -----
