@@ -19,8 +19,9 @@ TRANSACTION_TYPES = {
    "VISA ELECTRON-OSTO": "DIRECTDEBIT", # Added for Nordea
    "ATMOTTO/OTTO.": "ATM", # Added for Nordea
    "PALVELUMAKSU ALV 0%": "FEE",
-   "ITSEPALVELU": "ATM",
+   "ITSEPALVELU": "XFER",
    "E-MAKSU": "PAYMENT",
+   "E-LASKU": "PAYMENT",
 }
 
 #   Other types available: 'CREDIT', 'DEBIT', 'INT', 'DIV', 'DEP',

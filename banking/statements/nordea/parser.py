@@ -19,7 +19,7 @@ class NordeaCsvStatementParser(CsvStatementParser):
     "parser for various variations with common field semantics"
     
     mappings = {
-       "date":0, "amount":3, "payee":4, "acctto":5, "trntype":7, "refnum":8, "memo":9
+       "date":0, "amount":3, "payee":4, "trntype":7, "refnum":8, "memo":9
     }
 
     date_format = "%d.%m.%Y"
@@ -36,7 +36,11 @@ class NordeaCsvStatementParser(CsvStatementParser):
         line[3] = line[3].replace(',', '.')
 
         # Set transaction type
-        line[7] = TRANSACTION_TYPES[line[7].upper()]
+        transaction_type = line[7].upper()
+        if transaction_type in TRANSACTION_TYPES:
+            line[7] = TRANSACTION_TYPES[transaction_type]
+        else:
+            line[7] = 'DEBIT' if line[3][0] == '-' else 'CREDIT'
 
         # the CSV leaves off empty data at the end of record
         # so we fill in some blanks
