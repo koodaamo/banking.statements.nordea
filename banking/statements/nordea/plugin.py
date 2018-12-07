@@ -18,7 +18,7 @@ class NordeaDialect(csv.Dialect):
 
 
 class NordeaPlugin(Plugin):
-    "Suomen Osuuspankki / Finnish Osuuspankki"
+    "Nordea Suomi / Nordea Finland"
 
     def get_csv_signature(self, csvfile):
         csvfile.readline() # account # line
