@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.2.1'
+version = '1.3.0'
 
 setup(name='banking.statements.nordea',
       version=version,
       description="Account statement reader plugin for Nordea of Finland",
       long_description=open("README.md").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+           open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
         "Programming Language :: Python",
         'Development Status :: 4 - Beta',
